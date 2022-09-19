@@ -2,9 +2,8 @@ import { TemplateRef } from "@angular/core";
 
 export interface MceTableConf {
   id: string;
-  streamUrl?: string;
-  data?: any[];
-  columns: []
+  ep: string;
+  columns: ByxTableColumn[]
 }
 
 export interface ByxTableColumn {

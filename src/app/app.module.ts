@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FeatureModule } from './feature/feature.module';
 import { HttpService } from './feature/service/http.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -18,10 +19,12 @@ import { HttpService } from './feature/service/http.service';
     AppRoutingModule,
     FeatureModule,
     HttpClientModule,
-    TableModule
+    TableModule,
+    BrowserAnimationsModule
   ],
 
  
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  
 })
 export class AppModule { }

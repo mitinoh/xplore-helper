@@ -4,6 +4,7 @@ export interface MceTableConf {
   id: string;
   ep: string;
   columns: ByxTableColumn[]
+  rowDbClick?: (row: any) => void
 }
 
 export interface ByxTableColumn {
@@ -22,30 +23,6 @@ export enum ByxDataTypeEnum {
   DATE,
   BUTTON,
   BOOLEAN,
-  ENUM,   //genera una lista di ENUM una volta finito la complete
-  CUSTOM  //VUOLE UN TEMPLATEREF
+  ENUM,   
+  CUSTOM  
 }
-
-/*
-
- *ngVar="mceTableService.getValue(row, col.field) as fieldName"
-
-
-
-
-
- getValue(rowData: any, fieldPath: any) {
-    if (rowData) {
-
-      const fieldName = fieldPath
-      .replace(/[\[\]']+/g,'.')
-      .split('.')
-			.filter((i: any) => i);
-      const field = fieldName.reduce((acc: any, f: any) => acc?.[f], rowData)
-      
-      return field;
-    } return ""
-	}
-
-
-*/

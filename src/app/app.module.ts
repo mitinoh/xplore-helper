@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { FeatureModule } from './feature/feature.module';
 import { HttpService } from './feature/service/http.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import {DynamicDialogModule, DialogService} from 'primeng/dynamicdialog';
 
 @NgModule({
   declarations: [
@@ -20,8 +20,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FeatureModule,
     HttpClientModule,
     TableModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    DynamicDialogModule
   ],
+  providers: [DialogService],
 
  
   bootstrap: [AppComponent],

@@ -21,7 +21,7 @@
           </tr>
       </ng-template>
       <ng-template pTemplate="body" let-row >
-          <tr>
+          <tr (dblclick)="tableConf.rowDbClick?.(row)">
             <td *ngFor="let column of tableConf.columns" >
               <span *ngVar="getValue(row, column.field) as value">
                  {{value}}

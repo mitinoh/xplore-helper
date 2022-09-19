@@ -9,12 +9,14 @@ import { ByxTableComponent } from '../../core/byx-table/byx-table.component';
 import { TableModule } from 'primeng/table';
 
 import { NgVarDirective } from '../../shared/directive/ng-var.directive';
+import { NewLocationDialogComponent } from './new-location-dialog/new-location-dialog.component';
 
 @NgModule({
   declarations: [
     NewLocationComponent,
     ByxTableComponent,
-    NgVarDirective
+    NgVarDirective,
+    NewLocationDialogComponent
   ],
   imports: [
     CommonModule,

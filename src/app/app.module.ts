@@ -8,13 +8,16 @@ import { AppComponent } from './app.component';
 import { FeatureModule } from './feature/feature.module';
 import { HttpService } from './feature/service/http.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {DynamicDialogModule, DialogService} from 'primeng/dynamicdialog';
+import { DynamicDialogModule, DialogService } from 'primeng/dynamicdialog';
+import { FormsModule } from '@angular/forms';
+import { LocationService } from './feature/location/service/location.service';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
     FeatureModule,
@@ -23,10 +26,8 @@ import {DynamicDialogModule, DialogService} from 'primeng/dynamicdialog';
     BrowserAnimationsModule,
     DynamicDialogModule
   ],
-  providers: [DialogService],
-
- 
+  providers: [DialogService, LocationService],
   bootstrap: [AppComponent],
-  
+
 })
 export class AppModule { }

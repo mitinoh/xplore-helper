@@ -1,4 +1,5 @@
 import { Geometry } from "./geometry.interface";
+import { LocationCategory } from "./location-category.interface";
 import { User } from "./user.interface";
 
 export interface Location {
@@ -6,7 +7,7 @@ export interface Location {
   name: string;
   desc: string;
   indication: string;
-  locationCategory?: string[];
+  locationCategory?: LocationCategory[];
   insertUid?: User;
   geometry: Geometry;
   cdate: string;

@@ -1,6 +1,6 @@
 export interface Geometry {
   type: string;
-  coordinates?: (number)[] | null;
+  coordinates?: number[] | null;
 }
 
 export enum GeometryType {

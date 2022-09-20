@@ -1,1 +1,28 @@
-<p>new-location-dialog works!</p>
+<div class="formContainer"> 
+  <span class="p-float-label">
+    <input id="float-input-name" type="text" pInputText [(ngModel)]="row.name">
+    <label for="float-input-name">Name</label>
+  </span>
+
+  <span class="p-float-label">
+    <input id="float-input-desc" type="text" pInputText [(ngModel)]="row.desc">
+    <label for="float-input-desc">Desc</label>
+  </span>
+
+  <span class="p-float-label">
+    <input id="float-input-indication" type="text" pInputText [(ngModel)]="row.indication">
+    <label for="float-input-indication">Indication</label>
+  </span>
+
+  <span class="p-float-label">
+    <p-inputNumber id="float-input-latitude" mode="decimal" [minFractionDigits]="2" [(ngModel)]="row.geometry.coordinates![1]"></p-inputNumber>
+    <label for="float-input-latitude">Latitude</label>
+  </span>
+
+  <span class="p-float-label">
+    <p-inputNumber id="float-input-longitude" mode="decimal" [minFractionDigits]="2" [(ngModel)]="row.geometry.coordinates![0]"></p-inputNumber>
+    <label for="float-input-longitude">Longitude</label>
+  </span>
+
+
+</div>

@@ -22,7 +22,8 @@ export class NewLocationComponent implements OnInit {
       { field: 'desc', type: ByxDataTypeEnum.STRING },
       { field: 'address', type: ByxDataTypeEnum.STRING },
     ],
-    rowDbClick: (row: Location) => this.openNewLocationDialog(row)
+    data: [],
+    rowDbClick: (table: MceTableConf, row: Location) => this.openNewLocationDialog(table, row)
   }
 
   constructor(
@@ -32,12 +33,13 @@ export class NewLocationComponent implements OnInit {
     this.locationService.getLocationCategoryList();
   }
 
-  openNewLocationDialog(row: Location) {
+  openNewLocationDialog(table: MceTableConf, row: Location) {
+    
     this.dialogService.open(NewLocationDialogComponent, {
       header: 'Insert new location',
       width: '70%',
       height: '70%',
-      data: { row: row }
+      data: { row: row, table: table }
     });
   }
 

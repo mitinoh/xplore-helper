@@ -11,6 +11,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DynamicDialogModule, DialogService } from 'primeng/dynamicdialog';
 import { FormsModule } from '@angular/forms';
 import { LocationService } from './feature/location/service/location.service';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -24,9 +26,10 @@ import { LocationService } from './feature/location/service/location.service';
     HttpClientModule,
     TableModule,
     BrowserAnimationsModule,
-    DynamicDialogModule
+    DynamicDialogModule,
+    ToastModule
   ],
-  providers: [DialogService, LocationService],
+  providers: [DialogService, LocationService, MessageService],
   bootstrap: [AppComponent],
 
 })

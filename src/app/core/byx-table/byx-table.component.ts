@@ -11,8 +11,6 @@ export class ByxTableComponent implements OnInit {
 
   @Input() tableConf!: MceTableConf;
 
-  data: any = []
-
   constructor(private httpService: HttpService) { }
 
   ngOnInit(): void {
@@ -20,22 +18,19 @@ export class ByxTableComponent implements OnInit {
   }
 
   getTableData() {
-    this.httpService.doGet({ ep: this.tableConf.ep }).subscribe((res: any) => { this.data = JSON.parse(res); console.log(this.data)})
+    this.httpService.doGet({ ep: this.tableConf.ep }).subscribe((res: any) => { this.tableConf.data = JSON.parse(res) })
   }
-
-
-
 
   getValue(rowData: any, fieldPath: any) {
     if (rowData) {
 
       const fieldName = fieldPath
-      .replace(/[\[\]']+/g,'.')
-      .split('.')
-			.filter((i: any) => i);
+        .replace(/[\[\]']+/g, '.')
+        .split('.')
+        .filter((i: any) => i);
       const field = fieldName.reduce((acc: any, f: any) => acc?.[f], rowData)
-      
+
       return field;
     } return ""
-	}
+  }
 }

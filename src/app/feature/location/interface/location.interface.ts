@@ -6,12 +6,12 @@ export interface Location {
   _id: string;
   name: string;
   desc: string;
-  indication: string;
+  indication?: string;
   locationCategory?: LocationCategory[];
-  insertUid?: User;
+  uid?: User;
   geometry: Geometry;
-  cdate: string;
-  base64: string;
+  cdate?: string;
+  base64?: string;
 }
 
 

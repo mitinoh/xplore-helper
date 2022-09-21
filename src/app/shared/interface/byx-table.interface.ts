@@ -3,8 +3,9 @@ import { TemplateRef } from "@angular/core";
 export interface MceTableConf {
   id: string;
   ep: string;
-  columns: ByxTableColumn[]
-  rowDbClick?: (row: any) => void
+  columns: ByxTableColumn[];
+  data: any[];
+  rowDbClick?: (table: any, row: any) => void;
 }
 
 export interface ByxTableColumn {
@@ -23,6 +24,6 @@ export enum ByxDataTypeEnum {
   DATE,
   BUTTON,
   BOOLEAN,
-  ENUM,   
-  CUSTOM  
+  ENUM,
+  CUSTOM
 }

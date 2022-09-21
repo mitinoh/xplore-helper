@@ -4,7 +4,7 @@
   [showCurrentPageReport]="true"
   [rows]="50"
   [paginator]="true" 
-  [value]="data"
+  [value]="tableConf.data"
   selectionMode="single">
       <ng-template pTemplate="header">
           <tr>
@@ -21,7 +21,7 @@
           </tr>
       </ng-template>
       <ng-template pTemplate="body" let-row >
-          <tr (dblclick)="tableConf.rowDbClick?.(row)">
+          <tr (dblclick)="tableConf.rowDbClick?.(tableConf,row)">
             <td *ngFor="let column of tableConf.columns" >
               <span *ngVar="getValue(row, column.field) as value">
                  {{value}}

@@ -10,9 +10,9 @@ import { NewLocationDialogComponent } from './new-location-dialog/new-location-d
 import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
 import { InputNumberModule } from 'primeng/inputnumber';
-import {MultiSelectModule} from 'primeng/multiselect';
-import {ButtonModule} from 'primeng/button';
-
+import { MultiSelectModule } from 'primeng/multiselect';
+import { ButtonModule } from 'primeng/button';
+import { ToastModule } from 'primeng/toast';
 @NgModule({
   declarations: [
 
@@ -29,7 +29,8 @@ import {ButtonModule} from 'primeng/button';
     InputTextModule,
     InputNumberModule,
     MultiSelectModule,
-    ButtonModule
+    ButtonModule,
+    ToastModule
   ]
 })
 export class LocationModule { }

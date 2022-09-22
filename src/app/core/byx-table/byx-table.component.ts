@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MessageService } from 'primeng/api';
 import { HttpService } from 'src/app/feature/service/http.service';
 import { MceTableConf } from 'src/app/shared/interface/byx-table.interface';
 
@@ -11,7 +12,10 @@ export class ByxTableComponent implements OnInit {
 
   @Input() tableConf!: MceTableConf;
 
-  constructor(private httpService: HttpService) { }
+  constructor(
+    private httpService: HttpService,
+    protected messageService: MessageService
+  ) { }
 
   ngOnInit(): void {
     this.getTableData();
@@ -19,6 +23,11 @@ export class ByxTableComponent implements OnInit {
 
   getTableData() {
     this.httpService.doGet({ ep: this.tableConf.ep }).subscribe((res: any) => { this.tableConf.data = JSON.parse(res) })
+  }
+
+  reloadTableData() {
+    this.messageService.add({ severity: 'info', summary: 'Reloading data'});
+    this.getTableData()
   }
 
   getValue(rowData: any, fieldPath: any) {

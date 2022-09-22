@@ -9,6 +9,7 @@ import { GeometryType } from '../interface/geometry.interface';
 import { Location } from '../interface/location.interface';
 import { LocationService } from '../service/location.service';
 import { LoggerService } from '../../../shared/service/logger.service'
+import { LocationCategory } from '../interface/location-category.interface';
 
 @Component({
   selector: 'app-new-location-dialog',
@@ -41,14 +42,16 @@ export class NewLocationDialogComponent implements OnInit {
 
   createLocation() {
     delete this.row.indication
-    this.httpService.doPost({ ep: EP.LOCATION, body: this.row }).subscribe({
+    let body: any = JSON.parse(JSON.stringify(this.row))
+    body.locationCategory = this.row?.locationCategory?.map((category: LocationCategory) => category._id)
+    delete body?._id
+    this.httpService.doPost({ ep: EP.LOCATION, body: body }).subscribe({
       next: (res: any) => { this.logger.info(res) },
       error: (error: HttpErrorResponse) => {
-        console.log(1)
         this.messageService.add({ severity: 'error', summary: 'Error while creating', detail: error.message, sticky: true });
       },
       complete: () => {
-        // this.deleteUserLocation()
+        this.deleteUserLocation()
       }
     })
   }
@@ -58,9 +61,11 @@ export class NewLocationDialogComponent implements OnInit {
       next: (res: any) => { this.logger.info(res) },
       error: (error: HttpErrorResponse) => {
         this.messageService.add({ severity: 'error', summary: 'Error while deleting', detail: error.message, sticky: true });
+        this.closePopup()
       },
       complete: () => {
         this.messageService.add({ severity: 'success', summary: 'Location created' });
+        this.closePopup()
       }
     })
   }

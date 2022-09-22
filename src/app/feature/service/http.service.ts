@@ -28,8 +28,8 @@ export class HttpService {
   doDelete({ basePath = njURL, ep, id }: { basePath?: string, ep: string, id: string }): Observable<any> {
     let url: string = this.getUrl(basePath, ep, id)
     this.logger.http("DELETE", url)
-    return this.http.delete(url, { responseType: 'text' })
+    return this.http.delete(url)
   }
 
-  getUrl(basePath: string, ep: string, id?: string) { return basePath + ep + (id ? `/${id}` : '') }
+  getUrl(basePath: string, ep: string, id?: string) { console.log(id); return basePath + ep + (id ? `/${id}` : '') }
 }

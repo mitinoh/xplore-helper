@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { DialogService } from 'primeng/dynamicdialog';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ByxDataTypeEnum, MceTableConf } from 'src/app/shared/interface/byx-table.interface';
 import { HttpService } from '../../service/http.service';
 import { NewLocationDialogComponent } from '../new-location-dialog/new-location-dialog.component';
@@ -14,10 +14,13 @@ import { EP } from '../../interface/ep';
 })
 export class NewLocationComponent implements OnInit {
 
+  @ViewChild('tableRef') tableRefViewChild: any;
+
   tableConf: MceTableConf = {
     id: 'newLocationTable',
     ep: EP.NEWLOCATION,
     columns: [
+      { field: '_id', type: ByxDataTypeEnum.STRING },
       { field: 'name', type: ByxDataTypeEnum.STRING },
       { field: 'desc', type: ByxDataTypeEnum.STRING },
       { field: 'address', type: ByxDataTypeEnum.STRING },
@@ -33,14 +36,19 @@ export class NewLocationComponent implements OnInit {
     this.locationService.getLocationCategoryList();
   }
 
+  newLocationDialog?: DynamicDialogRef;
   openNewLocationDialog(table: MceTableConf, row: Location) {
-    
-    this.dialogService.open(NewLocationDialogComponent, {
+    this.newLocationDialog = this.dialogService.open(NewLocationDialogComponent, {
       header: 'Insert new location',
       width: '70%',
       height: '70%',
       data: { row: row, table: table }
     });
+    this.newLocationDialog.onClose.subscribe((data: any) =>{
+      this.tableRefViewChild.reloadTableData();
+    });
+
+    // getTableData
   }
 
   ngOnInit(): void { }

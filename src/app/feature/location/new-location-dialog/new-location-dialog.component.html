@@ -15,14 +15,14 @@
   </span>
 
   <span class="p-float-label">
-    <p-inputNumber id="float-input-latitude" mode="decimal" [minFractionDigits]="2"
-      [(ngModel)]="row.geometry.coordinates![1]"></p-inputNumber>
+    <p-inputNumber id="float-input-latitude" [minFractionDigits]="2" [(ngModel)]="row.geometry.coordinates![1]">
+    </p-inputNumber>
     <label for="float-input-latitude">Latitude</label>
   </span>
 
   <span class="p-float-label">
-    <p-inputNumber id="float-input-longitude" mode="decimal" [minFractionDigits]="2"
-      [(ngModel)]="row.geometry.coordinates![0]"></p-inputNumber>
+    <p-inputNumber id="float-input-longitude" [minFractionDigits]="2" [(ngModel)]="row.geometry.coordinates![0]">
+    </p-inputNumber>
     <label for="float-input-longitude">Longitude</label>
   </span>
 

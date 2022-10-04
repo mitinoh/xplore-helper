@@ -20,6 +20,7 @@ export class NewLocationDialogComponent implements OnInit {
 
   row: Location;
   table: MceTableConf;
+  selectedFile: any;
 
   constructor(
     protected config: DynamicDialogConfig,
@@ -46,7 +47,11 @@ export class NewLocationDialogComponent implements OnInit {
     body.locationCategory = this.row?.locationCategory?.map((category: LocationCategory) => category._id)
     delete body?._id
     this.httpService.doPost({ ep: EP.LOCATION, body: body }).subscribe({
-      next: (res: any) => { this.logger.info(res) },
+      next: (res: any) => {
+        this.logger.info(res)
+        let id: string = JSON.parse(res)["_id"]
+        this.uploadImage(id)
+      },
       error: (error: HttpErrorResponse) => {
         this.messageService.add({ severity: 'error', summary: 'Error while creating', detail: error.message, sticky: true });
       },
@@ -74,5 +79,24 @@ export class NewLocationDialogComponent implements OnInit {
     let idx: number = this.table.data.findIndex((td: Location) => td._id === this.row._id)
     this.table.data.splice(idx, 1)
     this.ref.close()
+  }
+
+  setSelectedFile(event: any) { this.selectedFile = event.files[0]; console.log(this.selectedFile) }
+
+
+  async uploadImage(id: string) {
+    let formData: any = new FormData();
+    formData.append('photo', this.selectedFile);
+
+    //http://localhost:3000/api/image/upload/location/
+    let ep: string = `${EP.IMAGEUPLOAD}${EP.LOCATION}/${id}`
+    this.httpService.doPost({ ep: ep, body: formData }).subscribe({
+      next: (res: any) => {
+        this.logger.info(res)
+      },
+      error: (error: HttpErrorResponse) => {
+        this.messageService.add({ severity: 'error', summary: 'Error while uploading image', detail: error.message, sticky: true });
+      }
+    })
   }
 }

@@ -30,5 +30,9 @@
     optionLabel="name"></p-multiSelect>
 
 
-  <p-button label="Complete" (click)="complete()"></p-button>
+  <p-fileUpload name="file" (onSelect)="setSelectedFile($event)" [showUploadButton]="false" [showCancelButton]="false"
+    accept="image/*">
+  </p-fileUpload>
+
+  <p-button label="Create" (click)="complete()"></p-button>
 </div>

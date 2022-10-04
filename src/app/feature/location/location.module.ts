@@ -13,6 +13,9 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
+import {FileUploadModule} from 'primeng/fileupload';
+import {HttpClientModule} from '@angular/common/http';
+
 @NgModule({
   declarations: [
 
@@ -30,7 +33,9 @@ import { ToastModule } from 'primeng/toast';
     InputNumberModule,
     MultiSelectModule,
     ButtonModule,
-    ToastModule
+    ToastModule,
+    FileUploadModule,
+    HttpClientModule
   ]
 })
 export class LocationModule { }

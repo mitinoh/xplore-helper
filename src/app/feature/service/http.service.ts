@@ -19,8 +19,8 @@ export class HttpService {
     return this.http.get(url, { responseType: 'text' })
   }
 
-  doPost({ basePath = njURL, ep, body }: { basePath?: string, ep: string, body: any }): Observable<any> {
-    let url: string = this.getUrl(basePath, ep)
+  doPost({ basePath = njURL, ep, body, id }: { basePath?: string, ep: string, body: any, id?: string  }): Observable<any> {
+    let url: string = this.getUrl(basePath, ep, id)
     this.logger.http("POST", url, body)
     return this.http.post(url, body, { responseType: 'text' })
   }
@@ -31,5 +31,5 @@ export class HttpService {
     return this.http.delete(url)
   }
 
-  getUrl(basePath: string, ep: string, id?: string) { console.log(id); return basePath + ep + (id ? `/${id}` : '') }
+  getUrl(basePath: string, ep: string, id?: string) { return basePath + ep + (id ? `/${id}` : '') }
 }

@@ -6,6 +6,8 @@ import { NewLocationDialogComponent } from '../new-location-dialog/new-location-
 import { Location } from '../interface/location.interface';
 import { LocationService } from '../service/location.service';
 import { EP } from '../../interface/ep';
+import { GeometryType } from '../interface/geometry.interface';
+import { LocationCategory } from '../interface/location-category.interface';
 
 @Component({
   selector: 'app-new-location',
@@ -15,12 +17,13 @@ import { EP } from '../../interface/ep';
 export class NewLocationComponent implements OnInit {
 
   @ViewChild('tableRef') tableRefViewChild: any;
-
+  newLocationDialog?: DynamicDialogRef;
+  emptyLocation: Location = { geometry: { type: GeometryType.POINT, coordinates: [0, 0] } }
+  newCategory: LocationCategory = { name: "" }
   tableConf: MceTableConf = {
     id: 'newLocationTable',
     ep: EP.NEWLOCATION,
     columns: [
-      { field: '_id', type: ByxDataTypeEnum.STRING },
       { field: 'name', type: ByxDataTypeEnum.STRING },
       { field: 'desc', type: ByxDataTypeEnum.STRING },
       { field: 'address', type: ByxDataTypeEnum.STRING },
@@ -36,20 +39,20 @@ export class NewLocationComponent implements OnInit {
     this.locationService.getLocationCategoryList();
   }
 
-  newLocationDialog?: DynamicDialogRef;
-  openNewLocationDialog(table: MceTableConf, row: Location) {
+  ngOnInit(): void { }
+
+  openNewLocationDialog(table: MceTableConf = this.tableConf, row: Location = this.emptyLocation) {
     this.newLocationDialog = this.dialogService.open(NewLocationDialogComponent, {
       header: 'Insert new location',
       width: '70%',
       height: '70%',
-      data: { row: row, table: table }
+      data: { row: row, table: table, tableRef: this.tableRefViewChild }
     });
-    this.newLocationDialog.onClose.subscribe((data: any) =>{
-      this.tableRefViewChild.reloadTableData();
-    });
-
-    // getTableData
+    //this.newLocationDialog.onClose.subscribe((data: any) => {});
   }
 
-  ngOnInit(): void { }
+  createNewLocation() {
+    this.locationService.addNewCategory(this.newCategory)
+  }
+
 }

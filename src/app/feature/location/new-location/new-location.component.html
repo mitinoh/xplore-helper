@@ -1,1 +1,18 @@
+<div class="topContainer">
+  <div>
+    <button pButton type="button" label="Create new location" class="p-button-info"
+      (click)="openNewLocationDialog()"></button>
+  </div>
+
+  <div class="newCategoryContainer">
+    <span class="p-input-icon-left">
+      <i class="pi pi-sun"></i>
+      <input id="float-input" placeholder="New Category" type="text" pInputText [(ngModel)]="newCategory.name">
+
+    </span>
+    <button pButton type="button" label="Add new category" class="p-button-secondary"
+      (click)="createNewLocation()"></button>
+  </div>
+</div>
+
 <app-byx-table #tableRef [tableConf]="tableConf"></app-byx-table>

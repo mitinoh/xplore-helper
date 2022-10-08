@@ -20,6 +20,7 @@ export class NewLocationDialogComponent implements OnInit {
 
   row: Location;
   table: MceTableConf;
+  tableRef: any;
   selectedFile: any;
 
   constructor(
@@ -32,6 +33,7 @@ export class NewLocationDialogComponent implements OnInit {
     protected logger: LoggerService) {
     this.row = this.config.data.row
     this.table = this.config.data.table
+    this.tableRef = this.config.data.tableRefViewChild
     this.row.geometry = { type: GeometryType.POINT, coordinates: [0, 0] }
   }
 
@@ -56,23 +58,27 @@ export class NewLocationDialogComponent implements OnInit {
         this.messageService.add({ severity: 'error', summary: 'Error while creating', detail: error.message, sticky: true });
       },
       complete: () => {
+        this.tableRef.reloadTableData()
         this.deleteUserLocation()
       }
     })
   }
 
   deleteUserLocation() {
-    this.httpService.doDelete({ ep: EP.NEWLOCATION, id: this.row._id }).subscribe({
-      next: (res: any) => { this.logger.info(res) },
-      error: (error: HttpErrorResponse) => {
-        this.messageService.add({ severity: 'error', summary: 'Error while deleting', detail: error.message, sticky: true });
-        this.closePopup()
-      },
-      complete: () => {
-        this.messageService.add({ severity: 'success', summary: 'Location created' });
-        this.closePopup()
-      }
-    })
+    if (this.row._id)
+      this.httpService.doDelete({ ep: EP.NEWLOCATION, id: this.row._id }).subscribe({
+        next: (res: any) => { this.logger.info(res) },
+        error: (error: HttpErrorResponse) => {
+          this.messageService.add({ severity: 'error', summary: 'Error while deleting', detail: error.message, sticky: true });
+          this.closePopup()
+        },
+        complete: () => {
+          this.messageService.add({ severity: 'success', summary: 'Location created' });
+          this.closePopup()
+        }
+      })
+    else
+      this.closePopup()
   }
 
   closePopup() {
